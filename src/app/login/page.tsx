@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, ArrowLeft, Apple, Chrome } from "lucide-react"
-import { db } from "../utility/supabase-client"
+// import { db } from "../utility/supabase-client"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -25,7 +25,7 @@ export default function LoginPage() {
 
     const { email, password } = formData
 
-    const { error } = await db.auth.signInWithPassword({ email, password })
+    // const { error } = await db.auth.signInWithPassword({ email, password })
 
     if (error) {
       setError(error.message)
@@ -74,7 +74,10 @@ export default function LoginPage() {
             <h2 className="text-3xl font-bold text-white">Welcome back</h2>
             <p className="mt-2 text-gray-400">
               Don't have an account?{" "}
-              <a href="/signup" className="text-purple-500 hover:text-purple-400">
+              <a
+                href="/signup"
+                className="text-purple-500 hover:text-purple-400"
+              >
                 Sign up
               </a>
             </p>
@@ -125,11 +128,18 @@ export default function LoginPage() {
                       })
                     }
                   />
-                  <label htmlFor="remember-me" className="ml-2 text-sm text-gray-400">
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-2 text-sm text-gray-400"
+                  >
                     Remember me
                   </label>
                 </div>
-                <a href="/" aria-disabled className="text-sm text-purple-500 hover:text-purple-400">
+                <a
+                  href="/"
+                  aria-disabled
+                  className="text-sm text-purple-500 hover:text-purple-400"
+                >
                   Forgot password?
                 </a>
               </div>
