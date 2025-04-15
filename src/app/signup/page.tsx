@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { db } from "../utility/supabase-client"
+// import { db } from "../utility/supabase-client"
 import React from "react"
 import { Eye, EyeOff, ArrowLeft, Apple, Chrome } from "lucide-react"
 import { useTheme } from "../contexts/theme-context"
@@ -20,7 +20,7 @@ export default function SignUpPage() {
     password: "",
     agreeToTerms: false,
   })
-  const{ theme, toggleTheme} = useTheme()
+  const { theme, toggleTheme } = useTheme()
   console.log(theme, "theme")
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -30,19 +30,19 @@ export default function SignUpPage() {
 
     const { email, password, firstName } = formData
 
-    const { data, error } = await db.auth.signUp({
-      email,
-      password,
-    })
+    // const { data, error } = await db.auth.signUp({
+    //   email,
+    //   password,
+    // })
 
     if (error) {
       setError(error.message)
     } else {
       // Optional: insert into `profiles` table
-      await db.from("profiles").insert({
-        id: data.user?.id,
-        username: firstName,
-      })
+      // await db.from("profiles").insert({
+      //   id: data.user?.id,
+      //   username: firstName,
+      // })
 
       router.push("/rent") // redirect after signup
     }
@@ -85,14 +85,21 @@ export default function SignUpPage() {
       <div className="flex-1 flex items-center justify-center p-8 bg-white">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900">Create an account</h2>
+            <h2 className="text-3xl font-bold text-gray-900">
+              Create an account
+            </h2>
             <p className="mt-2 text-gray-600">
               Already have an account?
-              <a href="/login" className="text-purple-500 hover:text-purple-600">
+              <a
+                href="/login"
+                className="text-purple-500 hover:text-purple-600"
+              >
                 Log in
               </a>
               <button onClick={toggleTheme}>toggleTheme</button>
-             
+              <div>
+                <p className="text-secondary">Hi Himanshu</p>
+              </div>
             </p>
           </div>
 
@@ -163,7 +170,11 @@ export default function SignUpPage() {
                 />
                 <label htmlFor="terms" className="ml-2 text-sm text-gray-400">
                   I agree to the{" "}
-                  <a href="/" aria-disabled className="text-purple-600 hover:text-purple-500">
+                  <a
+                    href="/"
+                    aria-disabled
+                    className="text-purple-600 hover:text-purple-500"
+                  >
                     Terms & Conditions
                   </a>
                 </label>
