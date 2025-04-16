@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-// import { db } from "../utility/supabase-client"
+import { db } from "../utility/supabase-client"
 import React from "react"
 import { Eye, EyeOff, ArrowLeft, Apple, Chrome } from "lucide-react"
 import { useTheme } from "../contexts/theme-context"
@@ -30,19 +30,19 @@ export default function SignUpPage() {
 
     const { email, password, firstName } = formData
 
-    // const { data, error } = await db.auth.signUp({
-    //   email,
-    //   password,
-    // })
+    const { data, error } = await db.auth.signUp({
+      email,
+      password,
+    })
 
     if (error) {
       setError(error.message)
     } else {
       // Optional: insert into `profiles` table
-      // await db.from("profiles").insert({
-      //   id: data.user?.id,
-      //   username: firstName,
-      // })
+      await db.from("profiles").insert({
+        id: data.user?.id,
+        username: firstName,
+      })
 
       router.push("/rent") // redirect after signup
     }
@@ -71,7 +71,7 @@ export default function SignUpPage() {
           </div>
           <div className="space-y-6">
             <h2 className="text-4xl font-bold">Capturing Moments,</h2>
-            <p className="text-4xl font-bold">Creating Memories</p>
+            <span className="text-4xl font-bold">Creating Memories</span>
             <div className="flex space-x-2">
               <div className="w-2 h-2 rounded-full bg-white/50"></div>
               <div className="w-2 h-2 rounded-full bg-white/50"></div>

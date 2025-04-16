@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, ArrowLeft, Apple, Chrome } from "lucide-react"
-// import { db } from "../utility/supabase-client"
+import { db } from "../utility/supabase-client"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -25,7 +25,7 @@ export default function LoginPage() {
 
     const { email, password } = formData
 
-    // const { error } = await db.auth.signInWithPassword({ email, password })
+    const { error } = await db.auth.signInWithPassword({ email, password })
 
     if (error) {
       setError(error.message)
