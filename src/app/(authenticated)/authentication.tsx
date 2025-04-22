@@ -6,10 +6,10 @@ export function AuthenticatedPages({children}) {
     console.log('Authentication')
 const {session, user, loading} = useSession()
 console.log(session, "sess")
-// if (!session ){
-//    redirect("/")
-//    return 
-// }
+if (!session && !loading ){
+   return redirect("/")
+   
+}
     // use redirect if session doesnt exist
     // create custom hook of useSession
     // const {user} = useUser()
