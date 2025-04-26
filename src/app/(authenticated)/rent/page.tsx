@@ -51,13 +51,14 @@ export default function Rent() {
           {/* Map View - Left Panel (Fixed) */}
           <div className="w-full md:w-7/12 lg:w-8/12 h-[300px] md:h-full relative p-4">
             <div className="w-full h-full rounded-xl overflow-hidden shadow-lg">
-              <MapView 
-                properties={properties} 
-                selectedProperty={selectedProperty}
-                setSelectedProperty={setSelectedProperty}
-                mapCenter={mapCenter}
-                zoom={zoom}
-              />
+             
+              <MapView
+        properties={properties}
+        selectedProperty={selectedProperty}
+        setSelectedProperty={setSelectedProperty}
+        mapCenter={[-79.3832, 43.6532]}
+        zoom={12}
+      />
             </div>
           </div>
           
