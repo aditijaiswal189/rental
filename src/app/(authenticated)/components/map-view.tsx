@@ -104,3 +104,101 @@ export default function MapView({
     </div>
   );
 }
+
+
+
+// import { useEffect, useRef, useState } from "react";
+// import mapboxgl from "mapbox-gl";
+// import DeckGL from "@deck.gl/react";
+// import { MapView as DeckMapView } from "@deck.gl/core";
+// import { GeoJsonLayer } from "@deck.gl/layers";
+// import "mapbox-gl/dist/mapbox-gl.css";
+
+// import { PropertyType } from "../types";
+
+// interface DeckMapViewProps {
+//   properties: PropertyType[];
+//   mapCenter: [number, number];
+//   zoom: number;
+// }
+
+// export default function MapView({
+//   properties,
+//   mapCenter,
+//   zoom,
+// }: DeckMapViewProps) {
+//   const mapContainer = useRef<HTMLDivElement>(null);
+//   const [map, setMap] = useState<mapboxgl.Map | null>(null);
+
+//   // 1. Initialize Mapbox
+//   useEffect(() => {
+//     if (map) return;
+//     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN!;
+//     const mb = new mapboxgl.Map({
+//       container: mapContainer.current!,
+//       style: "mapbox://styles/mapbox/streets-v12",
+//       center: mapCenter,
+//       zoom,
+//     });
+//     mb.addControl(new mapboxgl.NavigationControl(), "top-right");
+//     mb.on("load", () => setMap(mb));
+//     return () => mb.remove();
+//   }, [map, mapCenter, zoom]);
+
+//   if (!map) {
+//     // show a loader or empty div until Mapbox is ready
+//     return <div ref={mapContainer} className="h-full w-full" />;
+//   }
+
+//   // 2. Create a DeckGL layer — e.g. a GeoJsonLayer of your properties
+//   const layers = [
+//     new GeoJsonLayer({
+//       id: "properties",
+//       data: properties.map((p) => ({
+//         type: "Feature",
+//         geometry: {
+//           type: "Point",
+//           coordinates: [p.longitude, p.latitude],
+//         },
+//         properties: { ...p },
+//       })),
+//       pickable: true,
+//       stroked: false,
+//       filled: true,
+//       radiusMinPixels: 6,
+//       getPointRadius : 6,
+//       getFillColor: [99, 102, 241],
+//       onClick: ({ object }) => {
+//         if (object) {
+//           // you can drill into object.properties for your popup logic
+//           console.log("Clicked:", object.properties);
+//         }
+//       },
+//     }),
+//   ];
+
+//   // 3. Render DeckGL on top of the Mapbox canvas
+//   return (
+//     <div className="relative h-full w-full">
+//       <div ref={mapContainer} className="absolute inset-0 z-0" />
+//       <DeckGL
+//         views={[new DeckMapView({ id: "base-map" })]}
+//         controller={true}
+//         layers={layers}
+//         initialViewState={{
+//           longitude: mapCenter[0],
+//           latitude: mapCenter[1],
+//           zoom,
+//           pitch: 0,
+//           bearing: 0,
+//         }}
+//         // tie DeckGL to your Mapbox canvas
+//         context={{
+//           gl: map.painter.context.gl,
+//           useDevicePixels: true,
+//         }}
+//         style={{ position: "absolute", inset: 0, zIndex: 1 }}
+//       />
+//     </div>
+//   );
+// }
